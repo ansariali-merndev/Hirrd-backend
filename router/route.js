@@ -1,4 +1,5 @@
-import { json, Router } from "express";
+import { Router } from "express";
+import { PostJob } from "../model/postjob.js";
 
 export const router = Router();
 
@@ -8,9 +9,24 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/post-job", (req, res) => {
-  console.log(req.body);
+router.post("/post-job", async (req, res) => {
+  const {
+    recruiterEmail,
+    recruiterClerkId,
+    title,
+    description,
+    city,
+    company,
+  } = req.body;
+  await PostJob.create({
+    recruiterEmail,
+    recruiterClerkId,
+    title,
+    description,
+    city,
+    company,
+  });
   res.json({
-    message: "working",
+    message: "Posted Successfully",
   });
 });
