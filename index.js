@@ -1,16 +1,17 @@
 import express from "express";
 import { configDotenv } from "dotenv";
+import { router } from "./router/route.js";
+import { connectdb } from "./config/db.js";
 
 configDotenv();
 const app = express();
 const PORT = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "Hello Express App",
-  });
-});
+app.use(express.json());
+app.use("/", router);
 
-app.listen(PORT, () => {
-  console.log("server is running");
+connectdb().then(() => {
+  app.listen(PORT, () => {
+    console.log("server is running");
+  });
 });
