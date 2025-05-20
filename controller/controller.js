@@ -56,3 +56,20 @@ export const getJobByEmail = async (req, res) => {
     });
   }
 };
+
+export const getAllJob = async (req, res) => {
+  const allJob = await PostJob.find();
+  res.json({
+    message: "success",
+    job: allJob,
+  });
+};
+
+export const getJobDetailById = async (req, res) => {
+  const { id } = req.body;
+  const userJob = await PostJob.findById(id);
+  res.json({
+    message: "success",
+    job: userJob,
+  });
+};

@@ -33,6 +33,10 @@ const jobSchema = new Schema({
     type: String,
     required: true,
   },
+  applicants: {
+    type: Number,
+    default: 0,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
