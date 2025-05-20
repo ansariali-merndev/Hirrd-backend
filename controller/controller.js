@@ -73,3 +73,17 @@ export const getJobDetailById = async (req, res) => {
     job: userJob,
   });
 };
+
+export const updateApplicants = async (req, res) => {
+  try {
+    const { id } = req.body;
+    await PostJob.updateOne({ _id: id }, { $inc: { applicants: 1 } });
+    res.json({
+      message: "success",
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
