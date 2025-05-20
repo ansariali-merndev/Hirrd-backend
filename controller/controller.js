@@ -36,3 +36,23 @@ export const postJob = async (req, res) => {
     });
   }
 };
+
+export const getJobByEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const allJob = await PostJob.find({ recruiterEmail: email });
+    if (allJob.length === 0) {
+      return res.json({
+        message: "NotFound",
+      });
+    }
+    res.json({
+      message: "success",
+      job: allJob,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
